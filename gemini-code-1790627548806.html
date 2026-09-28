@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUS 313: Global Economics Practice Quiz</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      line-height: 1.5;
+      padding: 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    }
+    header {
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 1.75rem;
+      color: #1e3a8a;
+      font-weight: 700;
+    }
+    header h2 {
+      font-size: 1.25rem;
+      color: #475569;
+      font-weight: 600;
+    }
+    .progress {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #64748b;
+      margin-bottom: 0.75rem;
+    }
+    .question-text {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 1.25rem;
+    }
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      font-size: 1.1rem;
+      padding: 0.85rem 1rem;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #1e293b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: background-color 0.15s, border-color 0.15s;
+    }
+    .option-btn:hover:not(:disabled) {
+      background-color: #f8fafc;
+      border-color: #2563eb;
+    }
+    .opt-key {
+      background-color: #e2e8f0;
+      color: #334155;
+      font-weight: bold;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      min-width: 1.5rem;
+      text-align: center;
+    }
+    .option-btn.correct {
+      background-color: #dcfce7;
+      border-color: #16a34a;
+      color: #14532d;
+    }
+    .option-btn.incorrect {
+      background-color: #fee2e2;
+      border-color: #dc2626;
+      color: #7f1d1d;
+    }
+    .feedback {
+      background-color: #f8fafc;
+      border-left: 4px solid #3b82f6;
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+    .status-text {
+      font-size: 1.15rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    .status-text.correct-text { color: #16a34a; }
+    .status-text.incorrect-text { color: #dc2626; }
+    .explanation-text {
+      font-size: 1.05rem;
+      color: #334155;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 0.85rem;
+      background-color: #2563eb;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn:hover { background-color: #1d4ed8; }
+    .score-screen { text-align: center; padding: 1rem 0; }
+    .score-screen h3 { font-size: 1.5rem; color: #0f172a; margin-bottom: 1rem; }
+    .score-display { font-size: 2rem; font-weight: 700; color: #1e3a8a; margin-bottom: 1.5rem; }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      font-size: 0.95rem;
+      color: #64748b;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>BUS 313</h1>
+      <h2>Global Economics</h2>
+    </header>
+
+    <main id="quiz-app">
+      <div id="quiz-screen">
+        <div id="progress" class="progress">Question 1 of 10</div>
+        <div id="question-text" class="question-text"></div>
+        <div id="options-container" class="options-grid"></div>
+        
+        <div id="feedback-area" class="feedback hidden">
+          <div id="result-status" class="status-text"></div>
+          <p id="explanation-text" class="explanation-text"></p>
+        </div>
+
+        <button id="next-btn" class="btn hidden">Next Question [Enter]</button>
+      </div>
+
+      <div id="score-screen" class="score-screen hidden">
+        <h3>Quiz Complete!</h3>
+        <p class="score-display">Your Score: <span id="final-score"></span> / 10</p>
+        <button id="restart-btn" class="btn">Try again</button>
+      </div>
+    </main>
+
+    <footer>
+      Made by Pedro Villarreal with Gemini
+    </footer>
+  </div>
+
+  <script>
+    // EDITABLE QUESTIONS ARRAY
+    const questions = [
+      {
+        question: "Which economic concept explains why countries benefit from trade by specializing in goods with a lower opportunity cost?",
+        options: [
+          "Absolute advantage",
+          "Comparative advantage",
+          "Economies of scale",
+          "Purchasing power parity"
+        ],
+        answer: 1,
+        explanation: "Comparative advantage states that trade benefits nations when they specialize in producing goods with a lower opportunity cost."
+      },
+      {
+        question: "What is the primary effect of an import tariff on domestic consumers?",
+        options: [
+          "Lower prices on imported consumer goods",
+          "Higher prices for imported goods",
+          "Increased overall volume of foreign imports",
+          "Decreased domestic government revenue"
+        ],
+        answer: 1,
+        explanation: "Tariffs increase the cost of foreign goods, resulting in higher prices for domestic consumers."
+      },
+      {
+        question: "What does Purchasing Power Parity (PPP) compare between different nations?",
+        options: [
+          "Central bank policy interest rates",
+          "The purchasing power of currencies for a standardized basket of goods",
+          "Total stock market capitalizations",
+          "Annual gross domestic product growth rates"
+        ],
+        answer: 1,
+        explanation: "Purchasing Power Parity calculates the exchange rate needed to buy an identical basket of goods in two different countries."
+      },
+      {
+        question: "When a nation's total value of exports exceeds its total value of imports, it experiences a:",
+        options: [
+          "Trade deficit",
+          "Trade surplus",
+          "Capital deficit",
+          "Fiscal gap"
+        ],
+        answer: 1,
+        explanation: "A trade surplus occurs when the total economic value of exports is greater than imports over a given period."
+      },
+      {
+        question: "How does strong currency appreciation typically affect a country's exports?",
+        options: [
+          "Makes exports cheaper for foreign buyers",
+          "Makes exports more expensive for foreign buyers",
+          "Has no impact on foreign purchasing decisions",
+          "Guarantees an automatic increase in foreign export sales"
+        ],
+        answer: 1,
+        explanation: "A stronger currency increases foreign-currency prices for domestic exports, reducing export demand abroad."
+      },
+      {
+        question: "Which global organization establishes rules for international trade and resolves trade disputes?",
+        options: [
+          "International Monetary Fund (IMF)",
+          "World Bank",
+          "World Trade Organization (WTO)",
+          "Federal Reserve System"
+        ],
+        answer: 2,
+        explanation: "The World Trade Organization enforces global trade rules and mediates trade disputes between member nations."
+      },
+      {
+        question: "What is an import quota?",
+        options: [
+          "A tax levied directly on imported products",
+          "A financial grant given to domestic producers",
+          "A physical limit on the quantity of a good that can be imported",
+          "A legal limit on foreign exchange rates"
+        ],
+        answer: 2,
+        explanation: "An import quota sets a physical limit on the quantity of a specific item allowed into a country."
+      },
+      {
+        question: "Which section of the Balance of Payments tracks trade in goods, services, and net income transfers?",
+        options: [
+          "Capital Account",
+          "Current Account",
+          "Financial Account",
+          "Reserve Account"
+        ],
+        answer: 1,
+        explanation: "The Current Account records a nation's net trade in goods and services, foreign income, and transfer payments."
+      },
+      {
+        question: "What is the primary objective of a domestic production subsidy?",
+        options: [
+          "To raise domestic consumer prices",
+          "To lower domestic producers' unit production costs",
+          "To restrict total national output",
+          "To increase foreign competitor profit margins"
+        ],
+        answer: 1,
+        explanation: "Subsidies lower production costs for domestic firms, helping them compete against foreign competitors."
+      },
+      {
+        question: "What distinguishes Foreign Direct Investment (FDI) from foreign portfolio investment?",
+        options: [
+          "Purchasing short-term foreign bonds",
+          "Establishing physical business operations or acquiring controlling interest in a foreign company",
+          "Buying small shares of foreign stock purely for dividends",
+          "Exchanging physical currencies at spot exchange rates"
+        ],
+        answer: 1,
+        explanation: "Foreign Direct Investment involves active physical operations or controlling ownership in foreign enterprise operations."
+      }
+    ];
+
+    let activeQuestions = [...questions];
+    let currentIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    function loadQuestion() {
+      answered = false;
+      const q = activeQuestions[currentIndex];
+      document.getElementById('progress').textContent = `Question ${currentIndex + 1} of ${activeQuestions.length}`;
+      document.getElementById('question-text').textContent = q.question;
+      
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.innerHTML = '';
+      
+      q.options.forEach((optText, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerHTML = `<span class="opt-key">${index + 1}</span> ${optText}`;
+        btn.onclick = () => selectAnswer(index);
+        optionsContainer.appendChild(btn);
+      });
+
+      document.getElementById('feedback-area').classList.add('hidden');
+      document.getElementById('next-btn').classList.add('hidden');
+    }
+
+    function selectAnswer(selectedIndex) {
+      if (answered) return;
+      answered = true;
+
+      const q = activeQuestions[currentIndex];
+      const buttons = document.querySelectorAll('.option-btn');
+
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === q.answer) btn.classList.add('correct');
+        if (idx === selectedIndex && selectedIndex !== q.answer) btn.classList.add('incorrect');
+      });
+
+      const feedback = document.getElementById('feedback-area');
+      const status = document.getElementById('result-status');
+      const explanation = document.getElementById('explanation-text');
+
+      if (selectedIndex === q.answer) {
+        score++;
+        status.textContent = "Correct!";
+        status.className = "status-text correct-text";
+      } else {
+        status.textContent = "Incorrect";
+        status.className = "status-text incorrect-text";
+      }
+
+      explanation.textContent = q.explanation;
+      feedback.classList.remove('hidden');
+
+      const nextBtn = document.getElementById('next-btn');
+      nextBtn.classList.remove('hidden');
+      nextBtn.textContent = (currentIndex === activeQuestions.length - 1) ? "View Final Score [Enter]" : "Next Question [Enter]";
+    }
+
+    function handleNext() {
+      if (!answered) return;
+      currentIndex++;
+      if (currentIndex < activeQuestions.length) {
+        loadQuestion();
+      } else {
+        showScore();
+      }
+    }
+
+    function showScore() {
+      document.getElementById('quiz-screen').classList.add('hidden');
+      document.getElementById('score-screen').classList.remove('hidden');
+      document.getElementById('final-score').textContent = score;
+    }
+
+    function restartQuiz() {
+      for (let i = activeQuestions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [activeQuestions[i], activeQuestions[j]] = [activeQuestions[j], activeQuestions[i]];
+      }
+      currentIndex = 0;
+      score = 0;
+      document.getElementById('score-screen').classList.add('hidden');
+      document.getElementById('quiz-screen').classList.remove('hidden');
+      loadQuestion();
+    }
+
+    document.getElementById('next-btn').onclick = handleNext;
+    document.getElementById('restart-btn').onclick = restartQuiz;
+
+    document.addEventListener('keydown', (e) => {
+      const isQuizVisible = !document.getElementById('quiz-screen').classList.contains('hidden');
+      if (isQuizVisible) {
+        if (!answered && ['1', '2', '3', '4'].includes(e.key)) {
+          selectAnswer(parseInt(e.key, 10) - 1);
+        } else if (answered && e.key === 'Enter') {
+          handleNext();
+        }
+      } else {
+        if (e.key === 'Enter') restartQuiz();
+      }
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>
