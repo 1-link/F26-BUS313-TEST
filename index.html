@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUS 313 - Economic & Financial Environment of Global Business</title>
+  <style>
+    :root {
+      --primary: #004d40;
+      --primary-dark: #00251a;
+      --accent: #0288d1;
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --text: #212121;
+      --border: #e0e0e0;
+      --alt-row: #f9fbfb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      font-size: 16px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background-color: var(--primary-dark);
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+    }
+    .nav-brand { color: #fff; font-weight: bold; font-size: 1.1rem; text-decoration: none; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; list-style: none; }
+    .nav-links a {
+      color: #e0f2f1;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { background-color: rgba(255, 255, 255, 0.15); color: #fff; }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 2.5rem 1rem 2rem;
+      text-align: center;
+    }
+    header h1 { font-size: 2rem; margin-bottom: 0.5rem; line-height: 1.2; }
+    header p { font-size: 1.15rem; opacity: 0.9; }
+
+    main { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+    section {
+      background: var(--surface);
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+    }
+    section h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .glance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+    .glance-card {
+      background-color: var(--bg);
+      padding: 1.1rem;
+      border-radius: 6px;
+      border-left: 4px solid var(--primary);
+    }
+    .glance-card h3 { font-size: 1.05rem; margin-bottom: 0.3rem; color: var(--primary-dark); }
+
+    .table-container { overflow-x: auto; margin-top: 1rem; }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.93rem; }
+    th, td { padding: 0.7rem 0.85rem; border: 1px solid var(--border); vertical-align: top; }
+    th { background-color: var(--primary); color: white; font-weight: 600; }
+    tr:nth-child(even) { background-color: var(--alt-row); }
+
+    .project-box {
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .project-box h3 { color: var(--primary-dark); margin-bottom: 0.5rem; font-size: 1.2rem; }
+    .project-box ul { margin-left: 1.25rem; margin-top: 0.5rem; }
+    .project-box li { margin-bottom: 0.35rem; }
+
+    .policy-item { margin-bottom: 1.25rem; }
+    .policy-item h3 { font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 0.25rem; }
+
+    .practice-link {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    .practice-link:hover { background-color: var(--primary-dark); }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: var(--primary-dark);
+      color: white;
+      margin-top: 3rem;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.5rem; }
+      section { padding: 1.2rem; }
+      .nav-container { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      th, td { padding: 0.5rem; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="nav-brand">BUS 313</a>
+      <ul class="nav-links">
+        <li><a href="#glance">Glance</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#grades">Grades</a></li>
+        <li><a href="#project">Project</a></li>
+        <li><a href="#policies">Policies</a></li>
+        <li><a href="#practice">Practice</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header>
+    <h1>BUS 313: The Economic and Financial Environment of Global Business</h1>
+    <p>Instructor: Pedro Villarreal &bull; Fall 2026</p>
+  </header>
+
+  <main>
+    <section id="glance">
+      <h2>Course at a Glance</h2>
+      <div class="glance-grid">
+        <div class="glance-card">
+          <h3>Meeting Times</h3>
+          <p>Section 006: Tuesday & Thursday (TR) 01:30 PM – 02:45 PM</p>
+        </div>
+        <div class="glance-card">
+          <h3>Location</h3>
+          <p>BUSAD D104</p>
+        </div>
+        <div class="glance-card">
+          <h3>Office Hours</h3>
+          <p>Tuesday & Thursday (11:30 AM – 1:10 PM)</p>
+          <p><strong>Office:</strong> BUSAD C202</p>
+        </div>
+        <div class="glance-card">
+          <h3>Contact</h3>
+          <p><strong>Phone:</strong> (808) 956-5463</p>
+          <p><strong>Email:</strong> villarr@hawaii.edu</p>
+          <p><em>Subject format: "BUS 313 (F26): LAST, First Middle"</em></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="schedule">
+      <h2>Weekly Schedule</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 12%;">Week</th>
+              <th style="width: 32%;">Topic</th>
+              <th style="width: 38%;">Reading & Materials</th>
+              <th style="width: 18%;">What is Due</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Week 1<br>(8/25, 8/27)</td>
+              <td>CH 1: International Economics is Different (LO 1.1 - 1.4) & Continued</td>
+              <td>Podcast: Planet Money "The Invention of the Economy"<br>Video: WTO Official Channel "WTO explained"</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Week 2<br>(9/1, 9/3)</td>
+              <td>CH 2: The Basic Theory Using Demand and Supply (LO 2.1 – 2.4) & AI Crash Course</td>
+              <td>Video: MRU - "Premature Deindustrialization"</td>
+              <td>Course Project Part 1 (Open)</td>
+            </tr>
+            <tr>
+              <td>Week 3<br>(9/8, 9/10)</td>
+              <td>CH 3: Why Everybody Trades - Comparative Advantage (LO 3.1 – 3.4)</td>
+              <td>Video: MRU - "Comparative Advantage"</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Week 4<br>(9/15, 9/17)</td>
+              <td>CH 4: Trade - Factor Availability and Factor Proportions Are Key (LO 4.1 – 4.4)</td>
+              <td>Video: MRU - "The Heckscher - Ohlin Theorem"</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Week 5<br>(9/22, 9/24)</td>
+              <td>CH 5: Why Gains and Who Loses from Trade (LO 5.1 – 5.3)</td>
+              <td>Podcast: NPR Planet Money – "Episode 750: Retraining Day"</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Week 6<br>(9/29, 10/1)</td>
+              <td>CH 6: Scale Economies Imperfect Competition and Trade (LO 6.1 – 6.3)</td>
+              <td>Video: MRU – "Trade and External Economies of Scale"</td>
+              <td>Course Project Part II (Open)</td>
+            </tr>
+            <tr>
+              <td>Week 7<br>(10/6, 10/8)</td>
+              <td>CH 7: Growth and Trade (LO 7.1 – 7.3)</td>
+              <td>CH 7 Text Reading</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Week 8<br>(10/13, 10/15)</td>
+              <td>CH 8: Analysis of a Tariff (LO 8.1 – 8.3) & Midterm Exam</td>
+              <td>Podcast: NPR – "The Winners and Losers Under Trump’s Steel Tariff Plan"<br>Presentation: US - China Tariff War to Date</td>
+              <td><strong>Midterm-Exam (10/15)</strong></td>
+            </tr>
+            <tr>
+              <td>Week 9<br>(10/20, 10/22)</td>
+              <td>CH 9: Nontariff Barriers to Imports (LO 9.1 – 9.3)</td>
+              <td>Video: MRU – "Tariffs vs. Quotas"</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Week 10<br>(10/27, 10/29)</td>
+              <td>CH 10: Arguments for and Against Protection (LO 10.1 – 10.3)</td>
+              <td>CH 10 Text Reading</td>
+              <td><strong>Course Project Part 1 (Due)</strong></td>
+            </tr>
+            <tr>
+              <td>Week 11<br>(11/3, 11/5)</td>
+              <td>HOLIDAY: Election Day (11/3)<br>CH 11: Pushing Exports (LO 11.1 - 11.3)</td>
+              <td>Article: WSJ – "The WTO isn’t Dead, but America is Breaking It"</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Week 12<br>(11/10, 11/12)</td>
+              <td>CH 11: Continued<br>CH 12: Trade Blocs and Trade Blocks (LO 12.1 – 12.3)</td>
+              <td>CH 11 & CH 12 Text Reading</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Week 13<br>(11/17, 11/19)</td>
+              <td>CH 13: Trade and the Environment (LO 13.1 - 13.2)</td>
+              <td>CH 13 Text Reading</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Week 14<br>(11/24, 11/26)</td>
+              <td>CH 14: Trade Policies and Developing Countries (LO 14.1 – 14.2)<br>HOLIDAY: Thanksgiving Day (11/26)</td>
+              <td>CH 14 Text Reading</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Week 15<br>(12/1, 12/3)</td>
+              <td>CH 17: The Foreign Exchange Market (LO 17.1 – 17.3)</td>
+              <td>CH 17 Text Reading</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Week 16<br>(12/8, 12/10)</td>
+              <td>CH 19: What Determines Exchange Rates (LO 19.1 – 19.3)</td>
+              <td>Video: MRU – "Purchasing Power Parity"</td>
+              <td><strong>Course Project Part II (Due)</strong></td>
+            </tr>
+            <tr>
+              <td>Week 17<br>(12/14 – 12/18)</td>
+              <td>Finals Week</td>
+              <td>—</td>
+              <td><strong>Final Exam</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="grades">
+      <h2>How Grades Work</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Assessment / Requirement</th>
+              <th>Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Ten assignments</td><td>50%</td></tr>
+            <tr><td>Course project(s)</td><td>20%</td></tr>
+            <tr><td>Attendance &amp; Participation</td><td>10%</td></tr>
+            <tr><td>Mid-term exam</td><td>10%</td></tr>
+            <tr><td>Final Exam</td><td>10%</td></tr>
+            <tr><td>Bloomberg Markets Concepts (BMC) (Extra Credit)</td><td>5%</td></tr>
+            <tr><td>Bloomberg Global Trading Challenge (Extra Credit)</td><td>5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--primary-dark);">Letter Grade Scale</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>A+</th><th>A</th><th>A-</th><th>B+</th><th>B</th><th>B-</th><th>C+</th><th>C</th><th>C-</th><th>D+</th><th>D</th><th>D-</th><th>F</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>97%</td><td>93%</td><td>90%</td><td>87%</td><td>83%</td><td>80%</td><td>77%</td><td>73%</td><td>70%</td><td>67%</td><td>63%</td><td>60%</td><td>0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="project">
+      <h2>Course Project Instructions</h2>
+      <comment-tag id="1"><p style="margin-bottom: 1rem;">The course project counts for 20% of your final grade and integrates course concepts with current economic dynamics. AI tools (Google Gemini) are used to augment research, learning, and prototype creation under a "human in the loop" workflow. Cite all AI tool usage.</p></comment-tag id="1" text="Simply asking students to cite AI tools allows passive copy-pasting. To make the project AI-resilient and demand higher-order cognitive evaluation, require an AI Critique & Audit Log where students submit their prompt logs, identify two specific errors or oversimplifications in Gemini's economic analysis, and explain how they corrected them using course formulas.
+
+Suggested edit:
+'The course project counts for 20% of your final grade and integrates course concepts with current economic dynamics. AI tools (Google Gemini) are used to augment research and prototyping under a human-in-the-loop workflow. To demonstrate critical thinking, students must include an AI Audit Log detailing prompts used, identifying at least 2 AI errors/hallucinations, and explaining how they corrected them using course principles.'" type="suggestion">
+
+      <div class="project-box">
+        <h3>Course Project: Part One</h3>
+        <p>Write a brief report that includes charts, images, and valid sources based on the following instructions:</p>
+        <ul>
+          <li><strong>Product Description:</strong> Choose one product type from: <em>Candy bar</em>, <em>Motorcycle</em>, <em>Cosmetic product</em>, or <em>Shoe or Boot</em>.</li>
+          <li><strong>Industry Trends:</strong> Include a summary of industry and economic trends impacting your chosen product's market.</li>
+          <li><strong>Prototype Advertisement:</strong> Create a product image advertisement submitted in <code>.png</code>, <code>.jpg</code>, or <code>.gif</code> format.</li>
+          <li><strong>Price & Cost Breakdown:</strong> Provide average retail price and cost breakdown (industry averages acceptable).</li>
+          <comment-tag id="2"><li><strong>Supply & Demand:</strong> Create a hypothetical supply and demand curve with both numerical values and a visual curve.</li></comment-tag id="2" text="Hypothetical curves are easily generated by AI without student learning. Ground the exercise in real-world application by requiring empirical price data from two real competitors and calculating the price elasticity of demand ($\epsilon_d = \frac{\% \Delta Q}{\% \Delta P}$) at current prices.
+
+Suggested edit:
+'Supply & Demand: Ground your supply and demand curve with real empirical retail price points from two actual market competitors. Calculate price elasticity of demand ($\epsilon_d$) and show the specific equation and reasoning used.'" type="suggestion">
+          <li><strong>Breakeven Point:</strong> Calculate and state your product's breakeven point.</li>
+          <comment-tag id="3"><li><strong>Sourcing & Manufacturing:</strong> Summarize where raw materials will be sourced and where the finished product will be manufactured.</li></comment-tag id="3" text="AI can generate generic supply chains easily. Elevate cognitive effort by requiring a Comparative Sourcing Defense: compare two potential candidate nations using specific trade metrics (e.g., labor costs, transport infrastructure, current tariffs) and justify why one was selected over the other.
+
+Suggested edit:
+'Sourcing Defense: Compare two candidate nations for sourcing/manufacturing using specific trade metrics, labor data, and existing tariffs, and justify your final choice.'" type="suggestion">
+          <li><strong>Market Scope:</strong> State whether you plan to sell domestically, abroad, or both.</li>
+          <li><strong>Subsidies:</strong> Identify any subsidies that may assist production.</li>
+        </ul>
+      </div>
+
+      <div class="project-box">
+        <h3>Course Project: Part Two</h3>
+        <p>Write a brief report assuming sales in both domestic and foreign markets:</p>
+        <ul>
+          <li><strong>World Price:</strong> Find the average world price of your product.</li>
+          <comment-tag id="4"><li><strong>10% Tariff Analysis:</strong> Chart the impact of a 10% tariff on product price and demand. Explain who wins and loses (consumers, producers, government).</li></comment-tag id="4" text="Asking for a basic list of winners and losers invites boilerplate AI outputs. Frame this as a Strategic Executive Memo where the student acts as CFO, analyzing changes in consumer surplus ($\Delta CS$), producer surplus ($\Delta PS$), and deadweight loss, and defending a pricing/absorption strategy.
+
+Suggested edit:
+'10% Tariff Executive Memo: Frame your analysis as a CFO memo. Calculate $\Delta CS$, $\Delta PS$, and deadweight loss from a 10% tariff, and defend whether your business will absorb the tariff or pass costs to consumers.'" type="suggestion">
+          <li><strong>5% Subsidy Analysis:</strong> Chart the impact of a 5% subsidy and explain the impact on consumers, producers, and government.</li>
+          <li><strong>Market Reactions:</strong> Explain how consumers and producers are likely to react under each scenario.</li>
+          <li><strong>Net Gain/Loss Calculations:</strong> Calculate net gain/loss for producers, consumers, and government tax revenue from the 10% tariff.</li>
+          <comment-tag id="5"><li><strong>Retaliation Assessment:</strong> Briefly explain if foreign competitor governments are likely to retaliate with tariffs or subsidies.</li></comment-tag id="5" text="Brief summaries encourage superficial AI responses. Transform this into a Game Theory / Scenario Analysis where students model two distinct retaliatory strategies from foreign governments and evaluate the long-term impact on their firm's supply chain resiliency.
+
+Suggested edit:
+'Scenario & Game Theory Analysis: Model two possible retaliatory policy responses from foreign governments and evaluate the strategic impact on your firm's long-term profitability.'" type="suggestion">
+        </ul>
+      </div>
+    </section>
+
+    <section id="policies">
+      <h2>Policies</h2>
+
+      <div class="policy-item">
+        <h3>Attendance and Participation</h3>
+        <p>Attendance and course participation factor into your final grade. Active participation in class discussions and case studies is required. Points will be deducted for lack of participation and more than two unexcused absences.</p>
+      </div>
+
+      <div class="policy-item">
+        <h3>Exam & Make-up Policy</h3>
+        <p>You must have a written medical emergency to be absent from an exam. If allowed, make-up exams are scheduled at the discretion of the instructor, and the instructor reserves the right to deduct points. Make-up exams may be more rigorous. Exam regrade errors must be addressed with the instructor within a week after results are posted.</p>
+      </div>
+
+      <div class="policy-item">
+        <h3>File Submission Guidelines</h3>
+        <p>All materials must be submitted through Laulima. Files must be named as follows: <code>LastNameInitialAssignmentName</code> (e.g., <code>VillarrealPA1.xlsx</code>). Do not use any spaces, dashes, commas, or punctuation in file names.</p>
+      </div>
+
+      <div class="policy-item">
+        <h3>Academic Integrity & CBA Conduct</h3>
+        <p>All relevant CBA policies regarding academic honesty, grievance procedure, and confidentiality apply. Cheating, plagiarism, unauthorized assistance, or using work/exams from previous semesters or online will result in failing the class.</p>
+      </div>
+
+      <div class="policy-item">
+        <h3>Classroom Professionalism</h3>
+        <p>Spamming the class, attempting to speak on behalf of other students, or engaging in disrespectful/disruptive behavior will result in failing the course. Professional verbal and written communication is required.</p>
+      </div>
+
+      <div class="policy-item">
+        <h3>Course Content Variation & Withdrawal</h3>
+        <p>Exact dates and details are subject to change and will be announced through Laulima. Refer to the Office of Student Affairs for the last day for in-person restricted withdrawal ("W" grade).</p>
+      </div>
+
+      <div class="policy-item">
+        <h3>KOKUA Program (Disability Access)</h3>
+        <p>Students with disabilities are encouraged to contact KOKUA Program for confidential, free services at (808) 956-7511 or Queen Liliʻuokalani Center for Student Services, Room 013.</p>
+      </div>
+    </section>
+
+    <section id="practice">
+      <h2>Practice</h2>
+      <p style="margin-bottom: 1rem;">Access supplemental self-assessment materials below:</p>
+      <a href="quiz.html" class="practice-link">Practice quiz</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Pedro Villarreal &bull; 2026</p>
+  </footer>
+
+</body>
+</html>
